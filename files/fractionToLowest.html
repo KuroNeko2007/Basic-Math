@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fraction to lowest form</title>
+    
+	<link rel="stylesheet" href="/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/frac.css" type="text/css" media="all"/>
+	
+</head>
+
+<body>
+	<form>
+		<div class="field">
+			<label for="num1">Numerator: </label>
+			<input type="number" name="num1" id="num1" value="0" />
+		</div>
+		
+		<div class="field">
+			<label for="num2">Denominator: </label>
+			<input type="number" name="num2" id="num2" value="0" />
+		</div>
+		<input type="button" name="submit" id="submit" value="Calculate" />
+	</form>
+	
+	<div id="output">
+		
+	</div>
+	
+	<script type="text/javascript" charset="utf-8">
+		function calculateAndPrint() {
+			let num1 = document.querySelector('#num1').value;
+			let num2 = document.querySelector('#num2').value;
+			
+			let output = document.querySelector('#output');
+			
+			let h = hcf(num1, num2);
+			
+			output.innerHTML = `
+			<div class="frac">
+				<span>${num1 / h}</span>
+				<span class="symbol">/</span>
+				<span class="bottom">${num2 / h}</span>
+			</div>
+			`;
+		}
+		
+		function hcf(num1, num2) {
+			if(num1 === 0)
+				return num2;
+			return hcf(num2 % num1, num1);
+		}
+		
+		document.querySelector('#submit').addEventListener('click', calculateAndPrint);
+	</script>
+</body>
+
+</html>
